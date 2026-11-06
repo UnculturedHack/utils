@@ -14,6 +14,10 @@ void utils::log(string aMsg, LogType aLogType /*= LT_INFO*/)
 
 	// use std::ios::app to open the file and append to it rather than truncating the contents.
 	ofstream fileStream = ofstream(cpGenLogFilePath, ios::app);
-	fileStream << aMsg;
+	SYSTEMTIME now;
+	GetLocalTime(&now);
+	
+	fileStream << "[" << now.wMonth << "/" << now.wDay << "/" << now.wYear << " " << now.wHour
+		<< ":" << now.wMinute << ":" << now.wSecond << "] " << aMsg << endl;
 	fileStream.close();
 }
